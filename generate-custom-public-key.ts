@@ -12,7 +12,8 @@ const generateCustomPublicKey = (customStr: string) => {
     const keypair = Keypair.generate();
     publicKey = keypair.publicKey.toBase58();
     privateKey = keypair.secretKey;
-    if (publicKey.startsWith(customStr)) {
+    const prefix = publicKey.slice(0, customStr.length).toLowerCase();
+    if (prefix === customStr.toLowerCase()) {
       isFind = true;
       const end = new Date().getTime();
       spentTime = `${(end - start)/1000} sec`;
@@ -28,5 +29,5 @@ const generateCustomPublicKey = (customStr: string) => {
   }
 }
 
-const result = generateCustomPublicKey("ua");
+const result = generateCustomPublicKey("anza");
 console.log(result);
